@@ -1,0 +1,20 @@
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+import tkinter as tk
+from models.database import init_db
+from views.login_view import LoginWindow
+from views.tracker_view import TrackerWindow
+
+def launch_main_app():
+    for widget in root.winfo_children():
+        widget.destroy()
+    TrackerWindow(root)
+
+if __name__ == "__main__":
+    init_db()
+    root = tk.Tk()
+    app = LoginWindow(root, on_login_success=launch_main_app)
+    root.mainloop()
